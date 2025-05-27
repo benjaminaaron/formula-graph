@@ -1,4 +1,8 @@
 {
   "name": "formula-graph",
-  "author": "benjaminaaron"
+  "author": "benjaminaaron",
+  "type": "module",
+  "dependencies": {
+    "@cortex-js/compute-engine": "^0.29.1"
+  }
 }

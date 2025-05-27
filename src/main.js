@@ -17,3 +17,24 @@ function makeTree(node) {
 
 const tree = makeTree(ast)
 console.log(inspect(tree, false, null, true))
+
+export function toMermaid(root) {
+    let id = 0
+    const lines = [`graph TD`]
+    const esc = s => s.replace(/"/g, '\\"')
+    function walk(node) {
+        const thisId = `n${id++}`
+        lines.push(`${thisId}["${esc(node.label)}"]`)
+        if (node.children) {
+            for (const child of node.children) {
+                const childId = walk(child)
+                lines.push(`${thisId} --> ${childId}`)
+            }
+        }
+        return thisId
+    }
+    walk(root)
+    return lines.join("\n")
+}
+
+console.log(toMermaid(tree))
